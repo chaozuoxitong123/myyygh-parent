@@ -91,4 +91,52 @@ public class HospitalSetController {
             return Result.fail();
         }
     }
+
+    //5 根据id获取医院设置
+    @GetMapping("getHospSet/{id}")
+    public Result getHospSet(@PathVariable Long id){
+        HospitalSet hospitalSet = hospitalSetService.getById(id);
+        return Result.ok(hospitalSet);
+    }
+
+    //6 修改医院设置
+    @PostMapping("updateHospitalSet")
+    public Result updateHospitalSet(@RequestBody HospitalSet hospitalSet){
+        boolean flag = hospitalSetService.updateById(hospitalSet);
+        if (flag){
+            return Result.ok();
+        }else {
+            return Result.fail();
+        }
+    }
+
+    //7 批量删除医院设置
+    @DeleteMapping("batchRemove")
+    public Result batchRemoveHospitalSet(@RequestBody List<Long> id){
+        hospitalSetService.removeByIds(id);
+        return Result.ok();
+    }
+
+    //8 医院设置锁定和解锁
+    @PutMapping("lockHospitalSet/{id}/{status}")
+    public Result lockHospitalSet(@PathVariable Long id,@PathVariable Integer status){
+        //根据id出现医院信息
+        HospitalSet hospitalSet = hospitalSetService.getById(id);
+        //设置状态
+        hospitalSet.setStatus(status);
+        //调用方法
+        hospitalSetService.updateById(hospitalSet);
+        return Result.ok();
+    }
+
+
+    //9 发送签名秘钥
+    @PutMapping("sendKey/{id}")
+    public Result lockHospitalSet(@PathVariable Long id){
+        HospitalSet hospitalSet = hospitalSetService.getById(id);
+        String hoscode = hospitalSet.getHoscode();
+        String signKey = hospitalSet.getSignKey();
+        // todo 发送短信
+        return Result.ok();
+    }
 }
