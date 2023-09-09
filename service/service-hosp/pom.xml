@@ -16,6 +16,11 @@
     <description>service-hosp</description>
 
     <dependencies>
+        <dependency>
+            <groupId>com.atguigu.yygh</groupId>
+            <artifactId>model</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <build>
