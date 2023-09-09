@@ -1,5 +1,6 @@
 package com.atguigu.yygh.hosp.controller;
 
+import com.atguigu.yygh.common.exception.YyghException;
 import com.atguigu.yygh.common.result.Result;
 
 import com.atguigu.yygh.common.utils.MD5;
@@ -96,6 +97,12 @@ public class HospitalSetController {
     @GetMapping("getHospSet/{id}")
     public Result getHospSet(@PathVariable Long id){
         HospitalSet hospitalSet = hospitalSetService.getById(id);
+        try {
+            Long a = id /0;
+
+        }catch (Exception e){
+            throw new YyghException("失败",201);
+        }
         return Result.ok(hospitalSet);
     }
 
