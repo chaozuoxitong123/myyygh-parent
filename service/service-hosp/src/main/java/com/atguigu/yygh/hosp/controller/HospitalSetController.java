@@ -53,6 +53,7 @@ public class HospitalSetController {
     }
 
     //3 条件查询带分页
+    @ApiOperation(value = "条件查询带分页")
     @PostMapping("findPageHospSet/{current}/{limit}")
     public Result findPageHospSet(@PathVariable Long current ,
                                   @PathVariable Long limit,
@@ -78,6 +79,7 @@ public class HospitalSetController {
     }
 
     //4 添加医院设置
+    @ApiOperation(value = "添加医院设置")
     @PostMapping("saveHospitalSet")
     public Result saveHospitalSet(@RequestBody HospitalSet  hospitalSet){
         //设置状态 1 使用 0 不能使用
@@ -95,19 +97,15 @@ public class HospitalSetController {
     }
 
     //5 根据id获取医院设置
+    @ApiOperation(value = "根据id获取医院设置")
     @GetMapping("getHospSet/{id}")
     public Result getHospSet(@PathVariable Long id){
         HospitalSet hospitalSet = hospitalSetService.getById(id);
-        try {
-            Long a = id /0;
-
-        }catch (Exception e){
-            throw new YyghException("失败",201);
-        }
         return Result.ok(hospitalSet);
     }
 
     //6 修改医院设置
+    @ApiOperation(value = "修改医院设置")
     @PostMapping("updateHospitalSet")
     public Result updateHospitalSet(@RequestBody HospitalSet hospitalSet){
         boolean flag = hospitalSetService.updateById(hospitalSet);
@@ -119,6 +117,7 @@ public class HospitalSetController {
     }
 
     //7 批量删除医院设置
+    @ApiOperation(value = "批量删除医院设置")
     @DeleteMapping("batchRemove")
     public Result batchRemoveHospitalSet(@RequestBody List<Long> id){
         hospitalSetService.removeByIds(id);
@@ -126,6 +125,7 @@ public class HospitalSetController {
     }
 
     //8 医院设置锁定和解锁
+    @ApiOperation(value = "医院设置锁定和解锁")
     @PutMapping("lockHospitalSet/{id}/{status}")
     public Result lockHospitalSet(@PathVariable Long id,@PathVariable Integer status){
         //根据id出现医院信息
