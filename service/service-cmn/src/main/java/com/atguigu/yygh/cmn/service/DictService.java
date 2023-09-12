@@ -12,7 +12,7 @@ import java.util.List;
  * @Version 1.0
  */
 public interface DictService extends IService<Dict> {
-//    //根据数据id查询子数据列表
-//    List<Dict> findChlidData(Long id);
+    //根据数据id查询子数据列表
+    List<Dict> findChlidData(Long id);
 
 }
