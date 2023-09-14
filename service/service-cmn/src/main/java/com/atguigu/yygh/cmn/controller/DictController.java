@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -30,6 +31,12 @@ public class DictController {
     public Result findChildData(@PathVariable Long id){
         List<Dict> list = dictService.findChlidData(id);
         return Result.ok(list);
+    }
+
+    @ApiOperation(value = "导出")
+    @GetMapping(value = "/exportData")
+    public void exportData(HttpServletResponse response){
+        dictService.exportData(response);
     }
 
 }
